@@ -58,6 +58,11 @@
     <property name="title">
      <string>编辑(&amp;E)</string>
     </property>
+    <addaction name="actionUndo"/>
+    <addaction name="actionRedo"/>
+    <addaction name="actionCut"/>
+    <addaction name="actionCopy"/>
+    <addaction name="actionPaste"/>
    </widget>
    <widget class="QMenu" name="menu_O">
     <property name="title">
@@ -73,6 +78,7 @@
     <property name="title">
      <string>帮助(&amp;H)</string>
     </property>
+    <addaction name="actionAbout"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_E"/>
@@ -95,13 +101,16 @@
    <addaction name="actionOpen"/>
    <addaction name="actionSave"/>
    <addaction name="actionSaveAs"/>
+   <addaction name="separator"/>
    <addaction name="actionUndo"/>
    <addaction name="actionRedo"/>
    <addaction name="actionCut"/>
    <addaction name="actionCopy"/>
    <addaction name="actionPaste"/>
+   <addaction name="separator"/>
    <addaction name="actionFind"/>
    <addaction name="actionReplace"/>
+   <addaction name="separator"/>
    <addaction name="actionFont"/>
   </widget>
   <action name="actionNew">
@@ -239,24 +248,6 @@
     <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
-  <action name="actionCopy">
-   <property name="icon">
-    <iconset resource="Notepad.qrc">
-     <normaloff>:/img/120.bmp</normaloff>:/img/120.bmp</iconset>
-   </property>
-   <property name="text">
-    <string>复制(&amp;C)</string>
-   </property>
-   <property name="toolTip">
-    <string>复制</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+C</string>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::MenuRole::NoRole</enum>
-   </property>
-  </action>
   <action name="actionPaste">
    <property name="icon">
     <iconset resource="Notepad.qrc">
@@ -293,6 +284,9 @@
    </property>
   </action>
   <action name="actionReplace">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::ViewRefresh"/>
+   </property>
    <property name="text">
     <string>替换(&amp;R)</string>
    </property>
@@ -316,6 +310,35 @@
    </property>
    <property name="toolTip">
     <string>字体</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>关于(&amp;A)</string>
+   </property>
+   <property name="toolTip">
+    <string>关于</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionCopy">
+   <property name="icon">
+    <iconset resource="Notepad.qrc">
+     <normaloff>:/img/120.bmp</normaloff>:/img/120.bmp</iconset>
+   </property>
+   <property name="text">
+    <string>复制(&amp;C)</string>
+   </property>
+   <property name="toolTip">
+    <string>复制</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>
