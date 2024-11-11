@@ -45,6 +45,36 @@ private slots:
 
     void on_actionCopy_triggered();
 
+    void on_textEdit_copyAvailable(bool b);
+
+    void on_textEdit_redoAvailable(bool b);
+
+    void on_textEdit_undoAvailable(bool b);
+
+    void on_actionFontColor_triggered();
+
+    void on_actionLineWrap_triggered();
+
+    void on_actionFontBackgroundColor_triggered();
+
+    void on_actionBackgroundColor_triggered();
+
+    void on_actionFont_triggered();
+
+    void on_actionToolBar_triggered();
+
+    void on_actionStatusBar_triggered();
+
+    void on_actionSelectAll_triggered();
+
+    void on_actionExit_triggered();
+
+    void on_textEdit_cursorPositionChanged();
+
+    void on_actionDisplayhang_triggered();
+
+    void on_actionDisplayhang_triggered(bool checked);
+
 private:
     Ui::MainWindow *ui;
 

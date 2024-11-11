@@ -82,14 +82,14 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="searchText_2"/>
+        <widget class="QLineEdit" name="targetText"/>
        </item>
       </layout>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
-        <widget class="QCheckBox" name="checkBox">
+        <widget class="QCheckBox" name="cbCaseSensetive">
          <property name="text">
           <string>区分大小写</string>
          </property>
@@ -102,7 +102,7 @@
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <widget class="QRadioButton" name="brUp">
+           <widget class="QRadioButton" name="rbUp">
             <property name="text">
              <string>向上(&amp;U)</string>
             </property>

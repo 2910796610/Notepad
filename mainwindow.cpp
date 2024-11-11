@@ -6,6 +6,8 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QTextStream>
+#include <QColorDialog>
+#include <QFontDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -17,17 +19,40 @@ MainWindow::MainWindow(QWidget *parent)
     on_actionNew_triggered();
 
     //定义状态栏
-    statusLabel.setMaximumWidth(150);
+    statusLabel.setMaximumWidth(180);
     statusLabel.setText("length:" + QString::number(0) + "      lines:" + QString::number(1));
     ui->statusbar->addPermanentWidget(&statusLabel);
 
-    statusCursorLabel.setMaximumWidth(150);
+    statusCursorLabel.setMaximumWidth(180);
     statusCursorLabel.setText("Ln:" + QString::number(0) + "      Col:" + QString::number(1));
     ui->statusbar->addPermanentWidget(&statusCursorLabel);
 
     QLabel *author = new QLabel(ui->statusbar);//new用来防止被销毁
     author->setText(tr("陈意铭"));
     ui->statusbar->addPermanentWidget(author);
+
+    ui->actionCopy->setEnabled(false);
+    ui->actionUndo->setEnabled(false);
+    ui->actionRedo->setEnabled(false);
+    ui->actionCut->setEnabled(false);
+    ui->actionPaste->setEnabled(false);
+
+
+    QPlainTextEdit::LineWrapMode mode = ui->textEdit->lineWrapMode();
+
+    if (mode == QTextEdit::NoWrap) {
+        ui->textEdit->setLineWrapMode(QPlainTextEdit::WidgetWidth);
+
+        ui->actionLineWrap->setChecked(false);
+    } else {
+        ui->textEdit->setLineWrapMode(QPlainTextEdit::NoWrap);
+
+        ui->actionLineWrap->setChecked(true);
+    }
+
+    ui->actionStatusBar->setChecked(true);
+    ui->actionToolBar->setChecked(true);
+    on_actionDisplayhang_triggered(false);
 }
 
 MainWindow::~MainWindow()
@@ -45,14 +70,14 @@ void MainWindow::on_actionAbout_triggered()
 
 void MainWindow::on_actionFind_triggered()
 {
-    SearchDialog dlg;
+    SearchDialog dlg(this, ui->textEdit);
     dlg.exec();
 }
 
 
 void MainWindow::on_actionReplace_triggered()
 {
-    ReplaceDialog dlg;
+    ReplaceDialog dlg(this, ui->textEdit);
     dlg.exec();
 }
 
@@ -155,6 +180,9 @@ void MainWindow::on_textEdit_textChanged()
         this->setWindowTitle("*" + this->windowTitle());
         textChanged = true;
     }
+
+    statusLabel.setText("length:" + QString::number(ui->textEdit->toPlainText().length()) +
+                        "      lines:" + QString::number(ui->textEdit->document()->lineCount()));
 }
 
 bool MainWindow::userEditConfirmed()
@@ -203,6 +231,7 @@ void MainWindow::on_actionRedo_triggered()
 void MainWindow::on_actionCut_triggered()
 {
     ui->textEdit->cut();
+    ui->actionPaste->setEnabled(true);
 }
 
 
@@ -215,5 +244,132 @@ void MainWindow::on_actionPaste_triggered()
 void MainWindow::on_actionCopy_triggered()
 {
     ui->textEdit->copy();
+    ui->actionPaste->setEnabled(true);
+}
+
+
+void MainWindow::on_textEdit_copyAvailable(bool b)
+{
+    ui->actionNew->setEnabled(b);
+    ui->actionCut->setEnabled(b);
+    ui->actionCopy->setEnabled(b);
+}
+
+
+void MainWindow::on_textEdit_redoAvailable(bool b)
+{
+    ui->actionRedo->setEnabled(b);
+}
+
+
+void MainWindow::on_textEdit_undoAvailable(bool b)
+{
+    ui->actionUndo->setEnabled(b);
+}
+
+
+void MainWindow::on_actionFontColor_triggered()
+{
+    QColor color = QColorDialog::getColor(Qt::black, this, "选择颜色");
+    if (color.isValid()) {
+        ui->textEdit->setStyleSheet(QString("QPlainTextEdit {color: %1}").arg(color.name()));
+    }
+}
+
+
+void MainWindow::on_actionLineWrap_triggered()
+{
+    QPlainTextEdit::LineWrapMode mode = ui->textEdit->lineWrapMode();
+
+    if (mode == QTextEdit::NoWrap) {
+        ui->textEdit->setLineWrapMode(QPlainTextEdit::WidgetWidth);
+
+        ui->actionLineWrap->setChecked(true);
+    } else {
+        ui->textEdit->setLineWrapMode(QPlainTextEdit::NoWrap);
+
+        ui->actionLineWrap->setChecked(false);
+    }
+}
+
+
+void MainWindow::on_actionFontBackgroundColor_triggered()
+{
+
+}
+
+
+void MainWindow::on_actionBackgroundColor_triggered()
+{
+    QColor color = QColorDialog::getColor(Qt::black, this, "选择颜色");
+    if (color.isValid()) {
+        ui->textEdit->setStyleSheet(QString("QPlainTextEdit {background-color: %1}").arg(color.name()));
+    }
+}
+
+
+void MainWindow::on_actionFont_triggered()
+{
+    bool ok = false;
+    QFont font = QFontDialog::getFont(&ok, this);
+
+    if (ok)
+        ui->textEdit->setFont(font);
+}
+
+
+void MainWindow::on_actionToolBar_triggered()
+{
+    bool visible = ui->toolBar->isVisible();
+    ui->toolBar->setVisible(!visible);
+    ui->actionToolBar->setChecked(!visible);
+}
+
+
+void MainWindow::on_actionStatusBar_triggered()
+{
+    bool visible = ui->statusbar->isVisible();
+    ui->statusbar->setVisible(!visible);
+    ui->actionStatusBar->setChecked(!visible);
+}
+
+
+void MainWindow::on_actionSelectAll_triggered()
+{
+    ui->textEdit->selectAll();
+}
+
+
+void MainWindow::on_actionExit_triggered()
+{
+    if (userEditConfirmed())
+        exit(0);
+    // else->自行完善
+}
+
+
+void MainWindow::on_textEdit_cursorPositionChanged()
+{
+    int col = 0;
+    int ln = 0;
+    int flg = -1;
+    int pos = ui->textEdit->textCursor().position();
+    QString text = ui->textEdit->toPlainText();
+
+    for (int i = 0; i < pos; i++) {
+        if (text[i] == '\n') {
+            ln++;
+            flg = i;
+        }
+    }
+    flg++;
+    col = pos - flg;
+    statusCursorLabel.setText("Ln:" + QString::number(ln + 1) + "      Col:" + QString::number(col + 1));
+}
+
+
+void MainWindow::on_actionDisplayhang_triggered(bool checked)
+{
+    ui->textEdit->hideLineNumberArea(!checked);
 }
 

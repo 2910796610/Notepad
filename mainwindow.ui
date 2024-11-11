@@ -10,9 +10,6 @@
     <height>600</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>MainWindow</string>
-  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <property name="spacing">
@@ -31,7 +28,7 @@
      <number>1</number>
     </property>
     <item>
-     <widget class="QPlainTextEdit" name="textEdit"/>
+     <widget class="CodeEditor" name="textEdit"/>
     </item>
    </layout>
   </widget>
@@ -53,6 +50,7 @@
     <addaction name="actionSave"/>
     <addaction name="actionSaveAs"/>
     <addaction name="separator"/>
+    <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menu_E">
     <property name="title">
@@ -63,16 +61,30 @@
     <addaction name="actionCut"/>
     <addaction name="actionCopy"/>
     <addaction name="actionPaste"/>
+    <addaction name="separator"/>
+    <addaction name="actionFind"/>
+    <addaction name="actionReplace"/>
+    <addaction name="separator"/>
+    <addaction name="actionSelectAll"/>
    </widget>
    <widget class="QMenu" name="menu_O">
     <property name="title">
      <string>格式(&amp;O)</string>
     </property>
+    <addaction name="actionLineWrap"/>
+    <addaction name="actionDisplayhang"/>
+    <addaction name="actionFont"/>
+    <addaction name="actionFontColor"/>
+    <addaction name="separator"/>
+    <addaction name="actionFontBackgroundColor"/>
+    <addaction name="actionBackgroundColor"/>
    </widget>
    <widget class="QMenu" name="menu_V">
     <property name="title">
      <string>查看(&amp;V)</string>
     </property>
+    <addaction name="actionStatusBar"/>
+    <addaction name="actionToolBar"/>
    </widget>
    <widget class="QMenu" name="menu_H">
     <property name="title">
@@ -112,11 +124,16 @@
    <addaction name="actionReplace"/>
    <addaction name="separator"/>
    <addaction name="actionFont"/>
+   <addaction name="actionDisplayhang"/>
+   <addaction name="actionLineWrap"/>
+   <addaction name="separator"/>
+   <addaction name="actionToolBar"/>
+   <addaction name="actionStatusBar"/>
   </widget>
   <action name="actionNew">
    <property name="icon">
-    <iconset resource="Notepad.qrc">
-     <normaloff>:/img/new2.bmp</normaloff>:/img/new2.bmp</iconset>
+    <iconset resource="NotePad.qrc">
+     <normaloff>:/img/add_box_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</normaloff>:/img/add_box_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</iconset>
    </property>
    <property name="text">
     <string>新建(&amp;N)</string>
@@ -133,8 +150,8 @@
   </action>
   <action name="actionOpen">
    <property name="icon">
-    <iconset resource="Notepad.qrc">
-     <normaloff>:/img/open3.bmp</normaloff>:/img/open3.bmp</iconset>
+    <iconset resource="NotePad.qrc">
+     <normaloff>:/img/folder_open_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</normaloff>:/img/folder_open_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</iconset>
    </property>
    <property name="text">
     <string>打开(&amp;O)</string>
@@ -151,8 +168,8 @@
   </action>
   <action name="actionSave">
    <property name="icon">
-    <iconset theme="QIcon::ThemeIcon::DocumentSave" resource="Notepad.qrc">
-     <normaloff>:/img/430.bmp</normaloff>:/img/430.bmp</iconset>
+    <iconset resource="NotePad.qrc">
+     <normaloff>:/img/save_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</normaloff>:/img/save_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</iconset>
    </property>
    <property name="text">
     <string>保存(&amp;S)</string>
@@ -169,7 +186,8 @@
   </action>
   <action name="actionSaveAs">
    <property name="icon">
-    <iconset theme="QIcon::ThemeIcon::DocumentSaveAs"/>
+    <iconset resource="NotePad.qrc">
+     <normaloff>:/img/save_as_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</normaloff>:/img/save_as_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</iconset>
    </property>
    <property name="text">
     <string>另存为(&amp;A)</string>
@@ -183,7 +201,7 @@
   </action>
   <action name="actionExit">
    <property name="icon">
-    <iconset resource="Notepad.qrc">
+    <iconset resource="NotePad.qrc">
      <normaloff>:/img/exit.bmp</normaloff>:/img/exit.bmp</iconset>
    </property>
    <property name="text">
@@ -198,7 +216,8 @@
   </action>
   <action name="actionUndo">
    <property name="icon">
-    <iconset theme="QIcon::ThemeIcon::EditUndo"/>
+    <iconset resource="NotePad.qrc">
+     <normaloff>:/img/undo_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</normaloff>:/img/undo_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</iconset>
    </property>
    <property name="text">
     <string>撤销(&amp;U)</string>
@@ -209,13 +228,11 @@
    <property name="shortcut">
     <string>Ctrl+Z</string>
    </property>
-   <property name="menuRole">
-    <enum>QAction::MenuRole::NoRole</enum>
-   </property>
   </action>
   <action name="actionRedo">
    <property name="icon">
-    <iconset theme="QIcon::ThemeIcon::EditRedo"/>
+    <iconset resource="NotePad.qrc">
+     <normaloff>:/img/redo_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</normaloff>:/img/redo_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</iconset>
    </property>
    <property name="text">
     <string>恢复(&amp;)</string>
@@ -232,8 +249,8 @@
   </action>
   <action name="actionCut">
    <property name="icon">
-    <iconset resource="Notepad.qrc">
-     <normaloff>:/img/cut.bmp</normaloff>:/img/cut.bmp</iconset>
+    <iconset resource="NotePad.qrc">
+     <normaloff>:/img/content_cut_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 (1).png</normaloff>:/img/content_cut_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 (1).png</iconset>
    </property>
    <property name="text">
     <string>剪切(&amp;T)</string>
@@ -250,8 +267,8 @@
   </action>
   <action name="actionPaste">
    <property name="icon">
-    <iconset resource="Notepad.qrc">
-     <normaloff>:/img/paste.bmp</normaloff>:/img/paste.bmp</iconset>
+    <iconset resource="NotePad.qrc">
+     <normaloff>:/img/content_paste_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</normaloff>:/img/content_paste_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</iconset>
    </property>
    <property name="text">
     <string>粘贴(&amp;P)</string>
@@ -268,7 +285,8 @@
   </action>
   <action name="actionFind">
    <property name="icon">
-    <iconset theme="QIcon::ThemeIcon::EditFind"/>
+    <iconset resource="NotePad.qrc">
+     <normaloff>:/img/search_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 (1).png</normaloff>:/img/search_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 (1).png</iconset>
    </property>
    <property name="text">
     <string>查找(&amp;F)</string>
@@ -285,7 +303,8 @@
   </action>
   <action name="actionReplace">
    <property name="icon">
-    <iconset theme="QIcon::ThemeIcon::ViewRefresh"/>
+    <iconset resource="NotePad.qrc">
+     <normaloff>:/img/upgrade_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</normaloff>:/img/upgrade_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</iconset>
    </property>
    <property name="text">
     <string>替换(&amp;R)</string>
@@ -302,8 +321,8 @@
   </action>
   <action name="actionFont">
    <property name="icon">
-    <iconset resource="Notepad.qrc">
-     <normaloff>:/img/103.bmp</normaloff>:/img/103.bmp</iconset>
+    <iconset resource="NotePad.qrc">
+     <normaloff>:/img/abc_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</normaloff>:/img/abc_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</iconset>
    </property>
    <property name="text">
     <string>字体(&amp;F)</string>
@@ -328,8 +347,8 @@
   </action>
   <action name="actionCopy">
    <property name="icon">
-    <iconset resource="Notepad.qrc">
-     <normaloff>:/img/120.bmp</normaloff>:/img/120.bmp</iconset>
+    <iconset resource="NotePad.qrc">
+     <normaloff>:/img/content_copy_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 (1).png</normaloff>:/img/content_copy_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 (1).png</iconset>
    </property>
    <property name="text">
     <string>复制(&amp;C)</string>
@@ -344,9 +363,139 @@
     <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
+  <action name="actionLineWrap">
+   <property name="icon">
+    <iconset resource="NotePad.qrc">
+     <normaloff>:/img/lineWrap.png</normaloff>:/img/lineWrap.png</iconset>
+   </property>
+   <property name="text">
+    <string>自动换行(&amp;W)</string>
+   </property>
+   <property name="toolTip">
+    <string>自动换行</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionDisplayhang">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="NotePad.qrc">
+     <normaloff>:/img/showLineNumber.png</normaloff>:/img/showLineNumber.png</iconset>
+   </property>
+   <property name="text">
+    <string>显示行号(&amp;L)</string>
+   </property>
+   <property name="toolTip">
+    <string>显示行号</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionFontColor">
+   <property name="text">
+    <string>字体颜色</string>
+   </property>
+   <property name="toolTip">
+    <string>字体颜色</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionFontBackgroundColor">
+   <property name="text">
+    <string>字体背景颜色</string>
+   </property>
+   <property name="toolTip">
+    <string>字体背景颜色</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionBackgroundColor">
+   <property name="text">
+    <string>背景颜色</string>
+   </property>
+   <property name="toolTip">
+    <string>背景颜色</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionToolBar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="NotePad.qrc">
+     <normaloff>:/img/menu_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</normaloff>:/img/menu_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</iconset>
+   </property>
+   <property name="text">
+    <string>工具栏</string>
+   </property>
+   <property name="toolTip">
+    <string>工具栏</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionStatusBar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="NotePad.qrc">
+     <normaloff>:/img/statusBar.png</normaloff>:/img/statusBar.png</iconset>
+   </property>
+   <property name="text">
+    <string>状态栏</string>
+   </property>
+   <property name="toolTip">
+    <string>状态栏</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionSelectAll">
+   <property name="icon">
+    <iconset resource="NotePad.qrc">
+     <normaloff>:/img/select_all_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</normaloff>:/img/select_all_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</iconset>
+   </property>
+   <property name="text">
+    <string>全选(&amp;A)</string>
+   </property>
+   <property name="toolTip">
+    <string>全选</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CodeEditor</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">codeeditor.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
-  <include location="Notepad.qrc"/>
+  <include location="NotePad.qrc"/>
  </resources>
  <connections/>
 </ui>

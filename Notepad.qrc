@@ -1,18 +1,38 @@
 <RCC>
+    <qresource prefix="/img"/>
     <qresource prefix="/">
+        <file>img/20.ico</file>
         <file>img/103.bmp</file>
         <file>img/120.bmp</file>
-        <file>img/20.ico</file>
         <file>img/430.bmp</file>
+        <file>img/abc_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</file>
+        <file>img/add_box_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</file>
         <file>img/BLD.BMP</file>
+        <file>img/content_copy_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 (1).png</file>
+        <file>img/content_cut_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 (1).png</file>
+        <file>img/content_paste_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</file>
         <file>img/cut.bmp</file>
         <file>img/DBLUNDR.BMP</file>
         <file>img/exit.bmp</file>
+        <file>img/folder_open_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</file>
+        <file>img/handyman_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</file>
         <file>img/ITL.BMP</file>
+        <file>img/logout_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</file>
+        <file>img/menu_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</file>
         <file>img/new2.bmp</file>
         <file>img/open3.bmp</file>
         <file>img/paste.bmp</file>
+        <file>img/redo_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</file>
+        <file>img/save_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</file>
+        <file>img/save_as_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</file>
+        <file>img/search_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 (1).png</file>
+        <file>img/select_all_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</file>
+        <file>img/undo_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</file>
         <file>img/UNDRLN.BMP</file>
+        <file>img/upgrade_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png</file>
         <file>img/WORDUNDR.BMP</file>
+        <file>img/lineWrap.png</file>
+        <file>img/showLineNumber.png</file>
+        <file>img/statusBar.png</file>
     </qresource>
 </RCC>

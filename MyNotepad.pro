@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     aboutdialog.cpp \
+    codeeditor.cpp \
     main.cpp \
     mainwindow.cpp \
     replacedialog.cpp \
@@ -17,6 +18,7 @@ SOURCES += \
 
 HEADERS += \
     aboutdialog.h \
+    codeeditor.h \
     mainwindow.h \
     replacedialog.h \
     searchdialog.h
@@ -33,4 +35,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    Notepad.qrc
+    NotePad.qrc
+
+DISTFILES += \
+    img/lineWrap.png
